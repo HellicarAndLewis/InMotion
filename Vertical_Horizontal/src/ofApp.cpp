@@ -87,7 +87,7 @@ void ofApp::update(){
         float newspeed = ofMap(sin(ofGetElapsedTimef()), -1, 1, -5, 5);
         speed = newspeed;
     }
-    // sinusoidal oscillation in the width. change last two values of ofMap to change the range of oscillation.
+    // sinusoidal oscillation in the speed. change last two values of ofMap to change the range of oscillation.
     
     if (sinewidth == true){
         randomwidths = false;
@@ -111,8 +111,6 @@ void ofApp::update(){
         lockwidths = false;
         sinewidth = false;
         sinespeed = true;
-        cout << ofNoise(noiseseeds[1]) << endl;
-        cout << ofNoise(noiseseeds[2]) << endl;
         width1 = ofMap(ofNoise(noiseseeds[1]), 0, 1, 1, 50);
         width2 = ofMap(ofNoise(noiseseeds[2]), 0, 1, 1, 50);
         noiseseeds[1] += 0.01;
@@ -144,6 +142,7 @@ void ofApp::update(){
     // move rectangles by their x-coordinates
     
     yloc = yloc + speed;
+    // move rectangles by their y-coordinates
 }
 
 
