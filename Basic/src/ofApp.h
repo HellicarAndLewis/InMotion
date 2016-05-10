@@ -26,11 +26,13 @@ class ofApp : public ofBaseApp{
     int xloc;
     int frame;
     bool hide;
-    bool sine;
     ofxPanel gui;
     ofParameter<ofColor> color1;
     ofParameter<ofColor> color2;
     ofxSlider<float> speed;
-    ofxSlider<float> width;
-
+    ofxSlider<float> width1;
+    ofxSlider<float> width2;
+    ofxToggle sine;
+    ofxToggle randomwidths;
+    ofxToggle lockwidths;
 };
