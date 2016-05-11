@@ -35,13 +35,13 @@ void ofApp::setup(){
     gui.add(width2.setup("width 2", ofGetWidth(), 1, 400));
     // width of rectangles. ("name", initial value, min value, max value). initial value is set to screen width, which will be the maximum size of the rectangles. for some reason, the size specified here becomes the maximum size.
     
-    gui.add(color1.setup("color 1.1", 200, 1, 255));
-    gui.add(color2.setup("color 1.2", 100, 1, 255));
-    gui.add(color3.setup("color 2.1", 150, 1, 255));
-    gui.add(color4.setup("color 2.2", 255, 1, 255));
+    gui.add(color1);
+    gui.add(color2);
+//    gui.add(color3.setup("color 2.1", 150, 1, 255));
+//    gui.add(color4.setup("color 2.2", 255, 1, 255));
     // r and b values for rectangles (see drawGradient())
     
-    gui.add(speed.setup("speed", 5, -100, 100));
+    gui.add(speed.set("speed", 5, -100, 100));
     // speed at which rectangles move. ("name", initial value, min value, max value)
     
     gui.add(sine.setup("sine mode", false));
@@ -52,6 +52,8 @@ void ofApp::setup(){
     
     gui.add(lockwidths.setup("lock widths", true));
     // start with widths locked at the same value
+    
+    gui.add(direction.set("direction", ofVec2f(1.0, 0.0), ofVec2f(0.0, 0.0), ofVec2f(1.0, 1.0)));
     
     xloc = - 2 * ofGetWidth();
     // start drawing the rectangles from behind the screen
@@ -66,6 +68,9 @@ void ofApp::setup(){
     drawGradient();
     // starts in fullscreen so that the height and width are initiated with their maximum values
     
+    //Setup gradient shader
+    gradient.load("shaders/DummyVert.glsl", "shaders/DummyFrag.glsl");
+    
 }
 
 //--------------------------------------------------------------
@@ -74,7 +79,7 @@ void ofApp::update(){
     if (sine == true){
         randomwidths = false;
         lockwidths = false;
-        int width = ofMap(sin(ofGetElapsedTimef()), -1, 1, 1, ofGetWidth());
+        int width = ofMap(sin(ofGetElapsedTimef()), -1, 1, 1, 400);
         width1 = width;
         width2 = width;
     }
@@ -112,15 +117,26 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-
-    for (int i = 0; i < frame; i++){
-        if (i % 2 == 0){
-            rect1.draw(xloc+width1*i,0);
-        }
-        else{
-            rect2.draw(xloc+width2*i,0);
-        }
-    }
+    
+    gradient.begin();
+    gradient.setUniform2f("resolution", ofGetWidth(), ofGetHeight());
+    gradient.setUniform2f("direction", direction.get().x, direction.get().y);
+    gradient.setUniform1f("frequency", width1);
+    gradient.setUniform1f("speed", 5.0);
+    gradient.setUniform1f("time", ofGetElapsedTimef());
+    gradient.setUniform4f("color1", ofMap(color1.get().r, 0, 255, 0, 1.0), ofMap(color1.get().g, 0, 255, 0, 1.0), ofMap(color1.get().b, 0, 255, 0, 1.0), 1.0);
+    gradient.setUniform4f("color2", ofMap(color2.get().r, 0, 255, 0, 1.0), ofMap(color2.get().g, 0, 255, 0, 1.0), ofMap(color2.get().b, 0, 255, 0, 1.0), 1.0);
+    gradient.setUniform1f("speed", speed.get());
+    rect1.draw(0, 0, ofGetWidth(), ofGetHeight());
+    gradient.end();
+    //for (int i = 0; i < frame; i++){
+        //if (i % 2 == 0){
+            //rect1.draw(xloc+width1,0);
+        //}
+       // else{
+            //rect2.draw(xloc+width2,0);
+        //}
+    //}
     // draw every other rectangle a different color
     // xloc+width*i gives a starting x-coordinate that shifts at a given rate.
     // problem: because it starts from just double the screen, it can never be more than that, no matter how many it draws. this is why we shift the xloc periodically.
@@ -148,19 +164,19 @@ void ofApp::keyPressed(int key){
 //--------------------------------------------------------------
 void ofApp::drawGradient(){
     
-    for (int x=0; x<width1; x++) {
-        for (int y=0; y<ofGetHeight(); y++) {
-            rect1.setColor(x, y, ofColor::fromHsb(color1, x, color2));
-        }
-    }
-    rect1.update();
-
-    for (int x=0; x<width2; x++) {
-        for (int y=0; y<ofGetHeight(); y++) {
-            rect2.setColor(x, y, ofColor::fromHsb(color3, x, color4));
-        }
-    }
-    rect2.update();
+//    for (int x=0; x<width1; x++) {
+//        for (int y=0; y<ofGetHeight(); y++) {
+//            rect1.setColor(x, y, ofColor::fromHsb(color1, x, color2));
+//        }
+//    }
+//    rect1.update();
+//
+//    for (int x=0; x<width2; x++) {
+//        for (int y=0; y<ofGetHeight(); y++) {
+//            rect2.setColor(x, y, ofColor::fromHsb(color3, x, color4));
+//        }
+//    }
+//    rect2.update();
     // set gradient colors by varying by x coordinates, then draw rectangles.
 }
 
