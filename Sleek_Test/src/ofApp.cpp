@@ -4,15 +4,9 @@
 #define OUTPUT_HEIGHT 1080
 
 /*
-
+ 
  changes:
- - adjusted width controls
- - smoothed transitions of rectangles from off-screen to on-screen
- - added variable height in rectangles
- - added GUIs for color
- - added lock height parameter
- - added buffer to draw in secondary screen and add a preview screen with controls
- - changed "length" to "height" and "thickness" to "width"
+ - added sliders for background color
  
  key input:
  h = show/hide GUI
@@ -42,6 +36,7 @@ void ofApp::setup(){
     gui.add(nLinesGroup3.set("# lines group 3", 5, 0, 20));
     // sliders to specify the number of lines in each color group
     
+    gui.add(bckgrndcolor.set("background color", ofColor(0, 0, 0), ofColor(0,0), ofColor(255, 255)));
     gui.add(color1.set("color 1", ofColor(242, 114, 3), ofColor(0,0), ofColor(255, 255)));
     gui.add(color2.set("color 2", ofColor(14, 222, 229), ofColor(0,0), ofColor(255, 255)));
     gui.add(color3.set("color 3", ofColor(255, 255, 255), ofColor(0,0), ofColor(255, 255)));
@@ -64,10 +59,10 @@ void ofApp::setup(){
     
     gui.add(vertical.set("vertical mode", false));
     // switch to vertical scrolling
-
+    
     gui.add(lockheight.set("lock heights", false));
     // lock heights of lines to the heights of the first group
-
+    
     gui.add(lockwidth.set("lock width", false));
     // lock width of lines to the width of the first group
     
@@ -82,19 +77,19 @@ void ofApp::setup(){
     
     gui.add(sinespeed.set("sine speed", false));
     // initiate sine speed mode
-
+    
     offset1 = 0.3;
     offset2 = -0.5;
     offset3 = 0.8;
     // offset from the sine function for each color group. creates sort of parallax movement. these should be between -1 and 1.
     
-    for (int i = 0; i < nLinesGroup1; i++){
+    for (int i = 0; i < nLinesGroup1.getMax(); i++){
         x1.push_back(ofRandom(buffer.getWidth()));
     }
-    for (int i = 0; i < nLinesGroup2; i++){
+    for (int i = 0; i < nLinesGroup2.getMax(); i++){
         x2.push_back(ofRandom(buffer.getWidth()));
     }
-    for (int i = 0; i < nLinesGroup3; i++){
+    for (int i = 0; i < nLinesGroup3.getMax(); i++){
         x3.push_back(ofRandom(buffer.getWidth()));
     }
     // fill starting x-coordinates values with random values depending on how many lines are in each group.
@@ -108,18 +103,6 @@ void ofApp::setup(){
 
 //--------------------------------------------------------------
 void ofApp::update(){
-    
-    for (int i = 0; i < nLinesGroup1; i++){
-        x1.push_back(ofRandom(buffer.getWidth()));
-//        if (nLinesGroup1 < )
-//            x1.pop_back();
-    }
-    for (int i = 0; i < nLinesGroup2; i++){
-        x2.push_back(ofRandom(buffer.getWidth()));
-    }
-    for (int i = 0; i < nLinesGroup3; i++){
-        x3.push_back(ofRandom(buffer.getWidth()));
-    }
     
     
     if (lockwidth){
@@ -145,7 +128,6 @@ void ofApp::update(){
     }
     // sinusoidal oscillation in the width. change last two values of ofMap to change the range of oscillation.
     // lockwidth must be false because the offset values are all different. change these in the setup function to make the lines keep the same widthness as they oscillate.
-
     
     if (sineheight){
         lockheight = false;
@@ -164,7 +146,7 @@ void ofApp::update(){
     }
     // lock speeds to the speed of the first group.
     // sinespeed must be false because it gives each group a different speed.
-
+    
     if (sinespeed){
         lockspeeds = false;
         float newspeed = ofMap(sin(ofGetElapsedTimef()), -1, 1, -5, 10);
@@ -174,12 +156,6 @@ void ofApp::update(){
     }
     // sinusoidal oscillation in the speed. change last two values of ofMap to change the range of oscillation.
     // lockspeeds must be false because the offset values are all different. change these in the setup function to make the lines move at the same speed.
-    
-//    if (buffer.getWidth() > buffer.getHeight())
-//        screensize = buffer.getWidth();
-//    else
-//        screensize = buffer.getHeight();
-//    // determining whether height or width are larger in the screen size in order to determine which value to use in the looping function below.
 
     for (int i = 0; i < nLinesGroup1; i++){
         x1[i] += speed1;
@@ -223,7 +199,7 @@ void ofApp::draw(){
     buffer.begin();
     ofClear(0);
     ofFill();
-    ofSetColor(0);
+    ofSetColor(bckgrndcolor);
     ofDrawRectangle(0, 0, buffer.getWidth(), buffer.getHeight());
     for (int i = 0; i < nLinesGroup1; i++){
         ofSetColor(color1);
@@ -247,21 +223,20 @@ void ofApp::draw(){
             ofDrawRectangle(x3[i], (buffer.getHeight()-height3)/2, width3, height3);
     }
     // draw lines. if vertical mode is on, switch x coordinates to y-positions
-    
+
     buffer.end();
     if (!hide){
         gui.draw();
     }
-    
+
     buffer.draw(ofGetScreenWidth(), 0);
     buffer.draw(ofGetScreenWidth()/4, ofGetScreenHeight()/4, ofGetScreenWidth()/2, ofGetScreenHeight()/2);
     // gui must be drawn after the animation so that it is visible on top
-    
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-
+    
     if (key == 'f')
         ofToggleFullscreen();
     // toggle fullscreen mode on or off
@@ -273,55 +248,54 @@ void ofApp::keyPressed(int key){
     if (key == 'h')
         hide = !hide;
     // hide GUI panel
-    
 }
 
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key){
-
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::mouseMoved(int x, int y ){
-
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::mouseDragged(int x, int y, int button){
-
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
-
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::mouseReleased(int x, int y, int button){
-
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::mouseEntered(int x, int y){
-
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::mouseExited(int x, int y){
-
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::windowResized(int w, int h){
-
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::gotMessage(ofMessage msg){
-
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::dragEvent(ofDragInfo dragInfo){ 
-
+    
 }

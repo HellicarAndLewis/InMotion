@@ -117,7 +117,7 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-    
+
     gradient.begin();
     gradient.setUniform2f("resolution", ofGetWidth(), ofGetHeight());
     gradient.setUniform2f("direction", direction.get().x, direction.get().y);
