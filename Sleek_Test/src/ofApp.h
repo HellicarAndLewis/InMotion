@@ -24,7 +24,9 @@ class ofApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
     
     ofxPanel gui;
+    int screensize;
     bool hide;
+    bool cursor;
     int nLinesGroup1, nLinesGroup2, nLinesGroup3;
         // could make these into sliders
     vector<float> x1, x2, x3;
@@ -33,10 +35,11 @@ class ofApp : public ofBaseApp{
     ofxToggle vertical;
     ofxToggle lockspeeds;
     ofxToggle lockthickness;
+    ofxToggle sinespeed;
+    ofxToggle sinethickness;
     ofParameter<ofColor> color1;
     ofParameter<ofColor> color2;
     ofParameter<ofColor> color3;
-    ofxToggle sinespeed;
     float offset1, offset2, offset3;
     
     

@@ -3,15 +3,14 @@
 /*
 
  changes:
- - added function to lock thicknesses of color groups
- - removed noise function that varied thickness
- - removed "w#" variables, as they were redundant from "thickness#" variables
- - consolidated draw functions
+ - added sine function for width variation
+ - created variable to store largest screen size, to ensure that looping of lines functions despite changes in size
+ - added toggle functionality for showing/hiding the mouse
  
  key input:
- h = hide/show GUI
+ h = show/hide GUI
  f = toggle fullscreen
- m = hide mouse
+ m = show/hide mouse
  
  important: include ofxGui addons.
  
@@ -34,9 +33,9 @@ void ofApp::setup(){
     color3.set("color 3", ofColor(255, 255, 255), ofColor(0,0), ofColor(255, 255));
     // set colors for each color group. could add sliders for changing on the fly.
     
-    gui.add(speed1.setup("speed1", 1, -20, 20));
-    gui.add(speed2.setup("speed2", 0.7, -20, 20));
-    gui.add(speed3.setup("speed3", 0.1, -20, 20));
+    gui.add(speed1.setup("speed1", 4, -20, 20));
+    gui.add(speed2.setup("speed2", -2, -20, 20));
+    gui.add(speed3.setup("speed3", 7, -20, 20));
     // sliders for speed at which rectangles move. ("name", initial value, min value, max value)
     
     nLinesGroup1 = 2;
@@ -48,6 +47,9 @@ void ofApp::setup(){
     gui.add(thickness2.setup("thickness2", 3, 0.5, 5));
     gui.add(thickness3.setup("thickness3", 2, 0.5, 5));
     // sliders to specify the maximum thickness of the lines
+    
+    gui.add(vertical.setup("vertical mode", false));
+    // switch to vertical scrolling
 
     gui.add(lockspeeds.setup("lock speeds", false));
     // lock speeds to the speed of the first group
@@ -58,12 +60,13 @@ void ofApp::setup(){
     gui.add(sinespeed.setup("sine speed", false));
     // initiate sine speed mode
     
-    gui.add(vertical.setup("vertical mode", false));
-    // switch to vertical scrolling
+    gui.add(sinethickness.setup("sine thickness", false));
+    // initiate sine thickness mode
+    
     
     offset1 = 0.3;
-    offset2 = 1;
-    offset3 = -0.6;
+    offset2 = -0.5;
+    offset3 = 0.8;
     // offset from the sine function for each color group. creates sort of parallax movement. these should be between -1 and 1.
     
     
@@ -80,6 +83,9 @@ void ofApp::setup(){
     
     hide = false;
     // start with the GUI visible
+    
+    cursor = true;
+    // start with cursor visible
 
 }
 
@@ -95,6 +101,16 @@ void ofApp::update(){
     }
     // sinusoidal oscillation in the speed. change last two values of ofMap to change the range of oscillation.
     // lockspeeds must be false because the offset values are all different. change these in the setup function to make the lines move at the same speed.
+    
+    if (sinethickness == true){
+        lockthickness = false;
+        float newthickness = ofMap(sin(ofGetElapsedTimef()), -1, 1, 0.5, 5);
+        thickness1 = newthickness * (offset1 + 1);
+        thickness2 = newthickness * (offset2 + 1);
+        thickness3 = newthickness * (offset3 + 1);
+    }
+    // sinusoidal oscillation in the thickness. change last two values of ofMap to change the range of oscillation.
+    // lockwidth must be false because the offset values are all different. change these in the setup function to make the lines keep the same widthness as they oscillate.
     
     if (lockspeeds == true){
         sinespeed = false;
@@ -112,34 +128,46 @@ void ofApp::update(){
     }
     // lock thickness to the thickness of the first group.
     
+    if (ofGetWidth() > ofGetHeight())
+        screensize = ofGetWidth();
+    else
+        screensize = ofGetHeight();
+    // determining whether height or width are larger in the screen size in order to determine which value to use in the looping function below.
+    
     for (int i = 0; i < nLinesGroup1; i++){
         x1[i] += speed1;
-        if (speed1 > 0 && x1[i] > ofGetWidth()){
+        if (speed1 > 0 && x1[i] > screensize){
             x1[i] = 0;
         }
         if (speed1 < 0 && x1[i] < 0){
-            x1[i] = ofGetWidth();
+            x1[i] = screensize;
         }
     }
     for (int i = 0; i < nLinesGroup2; i++){
         x2[i] += speed2;
-        if (speed2 > 0 && x2[i] > ofGetWidth()){
+        if (speed2 > 0 && x2[i] > screensize){
             x2[i] = 0;
         }
         if (speed2 < 0 && x2[i] < 0){
-            x2[i] = ofGetWidth();
+            x2[i] = screensize;
         }
     }
     for (int i = 0; i < nLinesGroup3; i++){
         x3[i] += speed3;
-        if (speed3 > 0 && x3[i] > ofGetWidth()){
+        if (speed3 > 0 && x3[i] > screensize){
             x3[i] = 0;
         }
         if (speed3 < 0 && x3[i] < 0){
-            x3[i] = ofGetWidth();
+            x3[i] = screensize;
         }
     }
     // movement functions that ensure the lines will loop
+    
+    if (cursor == false)
+        ofHideCursor();
+    else
+        ofShowCursor();
+    // show cursor
 }
 
 //--------------------------------------------------------------
@@ -182,12 +210,15 @@ void ofApp::keyPressed(int key){
 
     if (key == 'f')
         ofToggleFullscreen();
+    // toggle fullscreen mode on or off
     
     if (key == 'm')
-        ofHideCursor();
+        cursor = !cursor;
+    // hide cursor
     
     if (key == 'h')
         hide = !hide;
+    // hide GUI panel
     
 }
 
