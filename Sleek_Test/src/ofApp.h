@@ -22,21 +22,17 @@ class ofApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
-		
-    int nLinesGroup1;
-    int nLinesGroup2;
-    int nLinesGroup3;
+    
+    ofxPanel gui;
+    bool hide;
+    int nLinesGroup1, nLinesGroup2, nLinesGroup3;
         // could make these into sliders
     vector<float> x1, x2, x3;
-    vector<float> w1, w2, w3;
-    float noiseseed1, noiseseed2, noiseseed3;
     ofxSlider<float> thickness1, thickness2, thickness3;
     ofxSlider<float> speed1, speed2, speed3;
-    ofxToggle noise;
     ofxToggle vertical;
     ofxToggle lockspeeds;
-    bool hide;
-    ofxPanel gui;
+    ofxToggle lockthickness;
     ofParameter<ofColor> color1;
     ofParameter<ofColor> color2;
     ofParameter<ofColor> color3;
@@ -45,13 +41,13 @@ class ofApp : public ofBaseApp{
     
     
 
-    ofxToggle sinewidth;
-    ofxToggle randomwidths;
-
-
-    ofxToggle noisewidths;
-    vector<float> noiseseeds;
-    float stepsize;
+//    ofxToggle sinewidth;
+//    ofxToggle randomwidths;
+//
+//
+//    ofxToggle noisewidths;
+//    vector<float> noiseseeds;
+//    float stepsize;
     
 
 
