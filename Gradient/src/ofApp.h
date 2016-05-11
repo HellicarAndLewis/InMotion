@@ -27,13 +27,15 @@ public:
     int frame;
     bool hide;
     ofxPanel gui;
-//    ofParameter<ofColor> color1;
-//    ofParameter<ofColor> color2;
-    ofxSlider<float> speed;
+    ofParameter<ofColor> color1;
+    ofParameter<ofColor> color2;
+    ofParameter<ofVec2f> direction;
+    
+    ofParameter<float> speed;
     ofxSlider<float> width1;
     ofxSlider<float> width2;
-    ofxSlider<float> color1;
-    ofxSlider<float> color2;
+//    ofxSlider<float> color1;
+//    ofxSlider<float> color2;
     ofxSlider<float> color3;
     ofxSlider<float> color4;
     ofxToggle sine;
@@ -43,4 +45,6 @@ public:
     void drawGradient();
     ofImage rect1;
     ofImage rect2;
+    
+    ofShader gradient;
 };
