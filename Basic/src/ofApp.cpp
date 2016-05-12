@@ -64,6 +64,9 @@ void ofApp::setup(){
         // counter for drawing rectangles successively
     
     hide = false;
+    
+    swapIn = new ofFbo();
+    swapOut = new ofFbo();
 
 }
 
@@ -100,7 +103,6 @@ void ofApp::update(){
     }
         // reset starting coordinate for drawing rectangles. really glitchy, find a smoother method
     
-    frame = ofGetElapsedTimeMillis();
         // keeps the for loop going - need to find a better method
 
     xloc = xloc + speed;
@@ -113,17 +115,10 @@ void ofApp::draw(){
     
     ofFill();
         // set rectangles to fill mode
-
-    for (int i = 0; i < frame; i++){
-        if (i % 2 == 0){
             ofSetColor(color1);
             ofDrawRectangle(xloc+width1*i, 0, width1, ofGetHeight());
-        }
-        else{
             ofSetColor(color2);
             ofDrawRectangle(xloc+width2*i, 0, width2, ofGetHeight());
-        }
-    }
         // draw every other rectangle a different color
         // xloc+width*i gives a starting x-coordinate that shifts at a given rate.
         // problem: because it starts from just double the screen, it can never be more than that, no matter how many it draws. this is why we shift the xloc periodically.

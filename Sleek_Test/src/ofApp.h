@@ -3,6 +3,7 @@
 #include "ofMain.h"
 #include "ofxGui.h"
 #include "ofxSlider.h"
+#include "Effect.h"
 
 class ofApp : public ofBaseApp{
     
@@ -10,6 +11,7 @@ public:
     void setup();
     void update();
     void draw();
+    void drawRectangles();
     
     void keyPressed(int key);
     void keyReleased(int key);
@@ -23,7 +25,13 @@ public:
     void dragEvent(ofDragInfo dragInfo);
     void gotMessage(ofMessage msg);
     
+    void onActiveEffectChanged(ofAbstractParameter &p);
     
+    vector<Effect*> effects;
+    
+    vector< ofParameter<bool>* > activeEffects;
+    
+    ofParameterGroup EffectsList;
     
     ofxPanel gui;
     bool hide;
@@ -36,5 +44,6 @@ public:
     ofParameter<bool> vertical, lockwidth, lockheight, lockspeeds, sinespeed, sinewidth, sineheight;
     ofParameter<ofColor> color1, color2, color3, bckgrndcolor;
     float offset1, offset2, offset3;
-    ofFbo buffer;
+    ofFbo* bufferIn;
+    ofFbo* bufferOut;
 };
