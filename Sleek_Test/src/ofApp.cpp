@@ -6,7 +6,7 @@
 /*
  
  changes:
- - added sliders for background color
+ - started working on preset functionality
  
  key input:
  h = show/hide GUI
@@ -24,18 +24,18 @@ void ofApp::setup(){
     
     buffer.allocate(OUTPUT_WIDTH, OUTPUT_HEIGHT);
     // create a buffer that fits to the size of the output screen (specify these dimensions above)
-    
+
     ofSetBackgroundColor(200);
     // set background color for GUI panel screen
     
     gui.setup("controls");
     // initiate GUI
     
-    gui.add(nLinesGroup1.set("# lines group 1", 3, 0, 20));
-    gui.add(nLinesGroup2.set("# lines group 2", 4, 0, 20));
-    gui.add(nLinesGroup3.set("# lines group 3", 5, 0, 20));
+    gui.add(nLinesGroup1.set("lines group 1", 3, 0, 20));
+    gui.add(nLinesGroup2.set("lines group 2", 4, 0, 20));
+    gui.add(nLinesGroup3.set("lines group 3", 5, 0, 20));
     // sliders to specify the number of lines in each color group
-    
+
     gui.add(bckgrndcolor.set("background color", ofColor(0, 0, 0), ofColor(0,0), ofColor(255, 255)));
     gui.add(color1.set("color 1", ofColor(242, 114, 3), ofColor(0,0), ofColor(255, 255)));
     gui.add(color2.set("color 2", ofColor(14, 222, 229), ofColor(0,0), ofColor(255, 255)));
@@ -236,7 +236,7 @@ void ofApp::draw(){
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-    
+
     if (key == 'f')
         ofToggleFullscreen();
     // toggle fullscreen mode on or off
@@ -244,10 +244,19 @@ void ofApp::keyPressed(int key){
     if (key == 'm')
         cursor = !cursor;
     // hide cursor
-    
+
     if (key == 'h')
         hide = !hide;
     // hide GUI panel
+
+    if(key == 's'){
+        gui.saveToFile("settings.xml");
+    }
+
+    if(key == 'l'){
+        cout << "load" << endl;
+        gui.loadFromFile("settings.xml");
+    }
 }
 
 //--------------------------------------------------------------

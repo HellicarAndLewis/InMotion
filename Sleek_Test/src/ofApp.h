@@ -30,7 +30,7 @@ public:
     bool cursor;
     ofParameter<int> nLinesGroup1, nLinesGroup2, nLinesGroup3;
     vector<float> x1, x2, x3;
-    ofParameter<int> speed1, speed2, speed3;
+    ofParameter<float> speed1, speed2, speed3;
     ofParameter<float> width1, width2, width3;
     ofParameter<float> height1, height2, height3;
     ofParameter<bool> vertical, lockwidth, lockheight, lockspeeds, sinespeed, sinewidth, sineheight;
