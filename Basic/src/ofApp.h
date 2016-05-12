@@ -35,4 +35,8 @@ class ofApp : public ofBaseApp{
     ofxToggle sine;
     ofxToggle randomwidths;
     ofxToggle lockwidths;
+    
+    ofShader shader;
+    ofFbo* swapIn;
+    ofFbo* swapOut;
 };
