@@ -1,5 +1,9 @@
 #include "ofApp.h"
 
+// gui for colors
+// variable speed
+// variable width / length
+// sine motion
 
 
 //--------------------------------------------------------------
@@ -17,7 +21,12 @@ void ofApp::setup(){
     gui.add(myColor2.set("color 2", ofColor(14, 222, 229), ofColor(0,0), ofColor(255, 255)));
     gui.add(vertical.set("vertical mode", false));
     // switch to vertical scrolling
-
+    
+    hide = false;
+    // start with the GUI visible
+    
+    cursor = true;
+    // start with cursor visible
     
 }
 
