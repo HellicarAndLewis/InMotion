@@ -36,8 +36,12 @@ class ofApp : public ofBaseApp{
     bool cursor;
     vector <horizRect> hRect;
     vector <vertRect> vRect;
+    
     ofParameter<bool> vertical;
     ofParameter<float> spawnrate;
+    ofParameter<float> speedMin;
+    ofParameter<float> speedMax;
+
     ofParameter<ofColor> myColor1;
     ofParameter<ofColor> myColor2;
         
