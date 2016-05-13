@@ -19,7 +19,7 @@ void horizRect::setup(float _w, float _h){
     
     speed = ofRandom(5, 20);
     
-    color1.set(200);
+    color1.set(50);
 }
 
 
@@ -27,7 +27,6 @@ void horizRect::update(){
     color1.set(ofMap(ofDist(x, 0, ofGetWidth(), 0), w+ofGetWidth(), -w, 50, 255));
     x += speed;
 }
-
 
 
 void horizRect::draw(){

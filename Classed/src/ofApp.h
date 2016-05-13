@@ -26,12 +26,17 @@ class ofApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
     
-
+    void spawn();
+    int last_spawntime;
+    int time;
+    int timeSinceLastSpawnTime;
+    
     ofxPanel gui;
     bool hide;
     bool cursor;
     vector <horizRect> hRect;
     vector <vertRect> vRect;
     ofParameter<bool> vertical;
+    ofParameter<float> spawnrate;
         
 };

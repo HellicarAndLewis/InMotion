@@ -19,7 +19,7 @@ void vertRect::setup(float _w, float _h){
     
     speed = ofRandom(5, 20);
     
-    color1.set(200);
+    color1.set(50);
 }
 
 
