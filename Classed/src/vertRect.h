@@ -15,7 +15,7 @@ class vertRect {
 public:
     
     void setup(float _w, float _h);
-    void update();
+    void update(ofColor yourColor1, ofColor yourColor2);
     void draw();
     
     float x;
@@ -24,6 +24,9 @@ public:
     float h;
     ofColor color1;
     ofColor color2;
+    ofColor _color;
+    ofColor _2color;
+    ofMesh mesh;
     
     float speed;
     

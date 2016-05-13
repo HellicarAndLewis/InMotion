@@ -13,8 +13,11 @@ void ofApp::setup(){
     // set up panel. can give it a name as well
     gui.add(spawnrate.set("spawn rate", 0.003, 0, .6));
     // rate at which lines are drawn on screen
+    gui.add(myColor1.set("color 1", ofColor(242, 114, 3), ofColor(0,0), ofColor(255, 255)));
+    gui.add(myColor2.set("color 2", ofColor(14, 222, 229), ofColor(0,0), ofColor(255, 255)));
     gui.add(vertical.set("vertical mode", false));
     // switch to vertical scrolling
+
     
 }
 
@@ -26,7 +29,7 @@ void ofApp::update(){
     
     if (vertical){
         for (int i = 0; i < vRect.size(); i++){
-            vRect[i].update();
+            vRect[i].update(myColor1, myColor2);
             if (vRect[i].y > ofGetHeight()){
                 vRect.erase(vRect.begin() + i);
             }
@@ -34,13 +37,19 @@ void ofApp::update(){
     }
     else{
         for (int i = 0; i < hRect.size(); i++){
-            hRect[i].update();
+            hRect[i].update(myColor1, myColor2);
             if (hRect[i].x > ofGetWidth()){
                 hRect.erase(hRect.begin() + i);
             }
         }
     }
     // remove lines from vectors if they have left the screen
+    
+    if (!cursor)
+        ofHideCursor();
+    else
+        ofShowCursor();
+    // show cursor
 }
 
 //--------------------------------------------------------------
@@ -93,6 +102,17 @@ void ofApp::spawn(){
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
 
+    if (key == 'f')
+        ofToggleFullscreen();
+    // toggle fullscreen mode on or off
+    
+    if (key == 'm')
+        cursor = !cursor;
+    // hide cursor
+    
+    if (key == 'h')
+        hide = !hide;
+    // hide GUI panel
 }
 
 //--------------------------------------------------------------

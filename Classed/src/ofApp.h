@@ -38,5 +38,7 @@ class ofApp : public ofBaseApp{
     vector <vertRect> vRect;
     ofParameter<bool> vertical;
     ofParameter<float> spawnrate;
+    ofParameter<ofColor> myColor1;
+    ofParameter<ofColor> myColor2;
         
 };
