@@ -11,13 +11,13 @@
 horizRect::horizRect(){
 }
 
-void horizRect::setup(float _w, float _h){
+void horizRect::setup(float _w, float _h, float minSpeed, float maxSpeed){
     w = _w;
     h = _h;
     x = - w;
     y = ofRandom(0, ofGetHeight());
     
-    speed = ofRandom(5, 20);
+    speed = ofRandom(minSpeed, maxSpeed);
     
     mesh.setMode(OF_PRIMITIVE_TRIANGLE_STRIP);
     mesh.addVertex( ofPoint(x, y) );

@@ -14,7 +14,7 @@
     
         public:
     
-            void setup(float _w, float _h);
+            void setup(float _w, float _h, float minSpeed, float maxSpeed);
             void update(ofColor yourColor1, ofColor yourColor2);
             void draw();
     
@@ -29,6 +29,8 @@
             ofMesh mesh;
         
             float speed;
+            float minSpeed;
+            float maxSpeed;
     
             horizRect();
     
