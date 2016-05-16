@@ -1,10 +1,5 @@
 #include "ofApp.h"
 
-// gui for colors
-// variable speed
-// variable width / length
-// sine motion
-
 
 //--------------------------------------------------------------
 void ofApp::setup(){
@@ -19,8 +14,8 @@ void ofApp::setup(){
     // rate at which lines are drawn on screen
     gui.add(myColor1.set("color 1", ofColor(242, 114, 3), ofColor(0,0), ofColor(255, 255)));
     gui.add(myColor2.set("color 2", ofColor(14, 222, 229), ofColor(0,0), ofColor(255, 255)));
-    gui.add(speedMin.set("Speed Min", 5, 1, 30));
-    gui.add(speedMax.set("Speed Max", 20, 5, 50));
+    gui.add(speedMin.set("speed min", 5, 1, 30));
+    gui.add(speedMax.set("speed max", 20, 5, 50));
     gui.add(vertical.set("vertical mode", false));
     // switch to vertical scrolling
     
@@ -116,7 +111,7 @@ void ofApp::keyPressed(int key){
     if (key == 'f')
         ofToggleFullscreen();
     // toggle fullscreen mode on or off
-    
+
     if (key == 'm')
         cursor = !cursor;
     // hide cursor
