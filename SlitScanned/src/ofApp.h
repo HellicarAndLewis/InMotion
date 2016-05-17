@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ofMain.h"
+#include "ofxGui.h"
 
 class ofApp : public ofBaseApp{
 
@@ -20,5 +21,19 @@ class ofApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
-		
+    
+    ofVideoGrabber vidGrabber;
+    deque <ofImage> imgBuffer;
+    int imgWidth, imgHeight;
+    int slitWidth;
+    int maxBufferSize;
+    ofxPanel gui;
+    ofParameter <ofColor> color;
+    ofParameter <float> lineHeight;
+    ofParameter <float> yTranslate;
+    ofParameter <float> spacing;
+    ofParameter <bool> stagger;
+    bool hide;
+    bool cursor;
+    int nLines;
 };
