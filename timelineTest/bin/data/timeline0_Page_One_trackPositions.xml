@@ -1,0 +1,86 @@
+<positions>
+    <element name="MyCircleRadius">
+        <x>0.000000000</x>
+        <y>57.000000000</y>
+        <width>1038.000000000</width>
+        <height>40.000000000</height>
+    </element>
+    <element name="bangs">
+        <x>0.000000000</x>
+        <y>57.000000000</y>
+        <width>1024.000000000</width>
+        <height>43.000000000</height>
+    </element>
+    <element name="height1">
+        <x>0.000000000</x>
+        <y>896.000000000</y>
+        <width>1024.000000000</width>
+        <height>0.000000000</height>
+    </element>
+    <element name="height2">
+        <x>0.000000000</x>
+        <y>928.000000000</y>
+        <width>1024.000000000</width>
+        <height>0.000000000</height>
+    </element>
+    <element name="height3">
+        <x>0.000000000</x>
+        <y>960.000000000</y>
+        <width>1024.000000000</width>
+        <height>0.000000000</height>
+    </element>
+    <element name="nLinesGroup1">
+        <x>0.000000000</x>
+        <y>57.000000000</y>
+        <width>1024.000000000</width>
+        <height>62.000000000</height>
+    </element>
+    <element name="nLinesGroup2">
+        <x>0.000000000</x>
+        <y>151.000000000</y>
+        <width>1024.000000000</width>
+        <height>66.000000000</height>
+    </element>
+    <element name="nLinesGroup3">
+        <x>0.000000000</x>
+        <y>249.000000000</y>
+        <width>1024.000000000</width>
+        <height>0.000000000</height>
+    </element>
+    <element name="speed1">
+        <x>0.000000000</x>
+        <y>281.000000000</y>
+        <width>1024.000000000</width>
+        <height>193.000000000</height>
+    </element>
+    <element name="speed2">
+        <x>0.000000000</x>
+        <y>506.000000000</y>
+        <width>1024.000000000</width>
+        <height>97.000000000</height>
+    </element>
+    <element name="speed3">
+        <x>0.000000000</x>
+        <y>635.000000000</y>
+        <width>1024.000000000</width>
+        <height>129.000000000</height>
+    </element>
+    <element name="width1">
+        <x>0.000000000</x>
+        <y>796.000000000</y>
+        <width>1024.000000000</width>
+        <height>0.000000000</height>
+    </element>
+    <element name="width2">
+        <x>0.000000000</x>
+        <y>828.000000000</y>
+        <width>1024.000000000</width>
+        <height>4.000000000</height>
+    </element>
+    <element name="width3">
+        <x>0.000000000</x>
+        <y>864.000000000</y>
+        <width>1024.000000000</width>
+        <height>0.000000000</height>
+    </element>
+</positions>
