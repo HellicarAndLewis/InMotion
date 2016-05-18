@@ -1,0 +1,20 @@
+<positions>
+    <element name="nLinesGroup2">
+        <x>0.000000000</x>
+        <y>212.000000000</y>
+        <width>1024.000000000</width>
+        <height>102.000000000</height>
+    </element>
+    <element name="speed x">
+        <x>0.000000000</x>
+        <y>57.000000000</y>
+        <width>1280.000000000</width>
+        <height>161.000000000</height>
+    </element>
+    <element name="speed y">
+        <x>0.000000000</x>
+        <y>250.000000000</y>
+        <width>1280.000000000</width>
+        <height>202.000000000</height>
+    </element>
+</positions>
