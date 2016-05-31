@@ -34,4 +34,5 @@ class ofApp : public ofBaseApp{
         ofParameter<bool> lockheight, lockspeeds, sinespeed;
         ofParameter<ofColor> color1, color2, color3, bckgrndcolor;
         float offset1, offset2, offset3;
+    ofFbo buffer;
     };

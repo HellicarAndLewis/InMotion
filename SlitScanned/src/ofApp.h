@@ -36,4 +36,6 @@ class ofApp : public ofBaseApp{
     bool hide;
     bool cursor;
     int nLines;
+    
+    ofFbo buffer;
 };

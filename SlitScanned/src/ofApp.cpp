@@ -1,4 +1,6 @@
 #include "ofApp.h"
+#define OUTPUT_WIDTH 1920
+#define OUTPUT_HEIGHT 1080
 //--------------------------------------------------------------
 void ofApp::setup(){
     
@@ -19,6 +21,10 @@ void ofApp::setup(){
     gui.add(spacing.set("spacing", 20, 0, ofGetHeight()/2));
     gui.add(yTranslate.set("translate - y", 0, -5, 5));
     gui.add(stagger.set("stagger", false));
+    
+    buffer.allocate(OUTPUT_WIDTH, OUTPUT_HEIGHT);
+    
+    ofBackground(100);
 }
 
 
@@ -48,7 +54,10 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-    
+    buffer.begin();
+    ofPushStyle();
+    ofSetColor(0);
+    ofDrawRectangle(0, 0, OUTPUT_WIDTH, OUTPUT_HEIGHT);
     ofPushMatrix();
     if (imgBuffer.size()>0){
         
@@ -72,6 +81,9 @@ void ofApp::draw(){
         }
     }
     ofPopMatrix();
+    buffer.end();
+    buffer.draw(ofGetScreenWidth(), 0);
+    buffer.draw(ofGetScreenWidth()/2 - OUTPUT_WIDTH/4, ofGetScreenHeight()/2 - OUTPUT_HEIGHT/4, OUTPUT_WIDTH/2, OUTPUT_HEIGHT/2);
     
     if (!hide)
         gui.draw();

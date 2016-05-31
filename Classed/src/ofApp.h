@@ -44,5 +44,7 @@ class ofApp : public ofBaseApp{
 
     ofParameter<ofColor> myColor1;
     ofParameter<ofColor> myColor2;
+    
+    ofFbo buffer;
         
 };
