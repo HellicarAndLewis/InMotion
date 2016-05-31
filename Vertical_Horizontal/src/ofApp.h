@@ -27,6 +27,7 @@ public:
     int yloc;
     int frame;
     bool hide;
+    bool cursor;
     ofxPanel gui;
     ofParameter<ofColor> color1;
     ofParameter<ofColor> color2;

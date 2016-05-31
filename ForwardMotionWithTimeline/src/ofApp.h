@@ -40,5 +40,6 @@ public:
     float endingX;
     float endingY;
     float space;
-
+    bool hide;
+    bool cursor;
 };

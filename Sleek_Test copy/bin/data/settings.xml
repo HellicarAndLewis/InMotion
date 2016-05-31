@@ -1,0 +1,26 @@
+<controls>
+	<lines_group_1>3</lines_group_1>
+	<lines_group_2>4</lines_group_2>
+	<lines_group_3>5</lines_group_3>
+	<background_color>218, 107, 175, 255</background_color>
+	<color_1>242, 114, 3, 255</color_1>
+	<color_2>14, 222, 229, 255</color_2>
+	<color_3>255, 255, 255, 255</color_3>
+	<speed_1>4</speed_1>
+	<speed_2>-2</speed_2>
+	<speed_3>7</speed_3>
+	<width_1>2</width_1>
+	<width_2>2</width_2>
+	<width_3>2</width_3>
+	<height_1>1080</height_1>
+	<height_2>1080</height_2>
+	<height_3>1080</height_3>
+	<vertical_mode>0</vertical_mode>
+	<lock_heights>0</lock_heights>
+	<lock_width>0</lock_width>
+	<sine_width>0</sine_width>
+	<sine_height>0</sine_height>
+	<lock_speeds>0</lock_speeds>
+	<sine_speed>0</sine_speed>
+<controls/>
+</controls>

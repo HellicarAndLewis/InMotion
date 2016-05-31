@@ -16,12 +16,13 @@ void ofApp::setup(){
     timeline.addCurves("speed x", ofRange(speedxMin, speedxMax));
     timeline.addCurves("speed y", ofRange(speedyMin, speedyMax));
     
-    numberOfLines = 10;
+    numberOfLines = 20;
     startingX = ofGetWidth()/2;
-    startingY = ofGetHeight()/2;
-    lineW = 5;
+    startingY = 4*(ofGetHeight()/5);
+    lineW = 2;
     endingX = ofGetWidth()/(numberOfLines - 1);
     endingY = 0;
+    cursor = true;
     
     for (int i = 0; i < numberOfLines; i++){
         moveLine tempLine;
@@ -32,6 +33,11 @@ void ofApp::setup(){
 
 //--------------------------------------------------------------
 void ofApp::update(){
+    
+    if (!cursor)
+        ofHideCursor();
+    else
+        ofShowCursor();
     
     for (int i = 0; i < myLines.size(); i++){
         myLines[i].update(timeline.getValue("speed x"), timeline.getValue("speed y"));
@@ -44,13 +50,21 @@ void ofApp::draw(){
     for (int i = 0; i < myLines.size(); i++){
         myLines[i].draw();
     }
-    
+    if (!hide)
     timeline.draw();
+    
+
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
     
+    if (key == 'h')
+        hide = !hide;
+    if (key == 'm'){
+        cout << cursor << endl;
+        cursor = !cursor;
+    }
 }
 
 //--------------------------------------------------------------

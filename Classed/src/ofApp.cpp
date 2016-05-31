@@ -24,7 +24,6 @@ void ofApp::setup(){
     
     cursor = true;
     // start with cursor visible
-    
 }
 
 //--------------------------------------------------------------

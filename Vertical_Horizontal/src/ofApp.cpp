@@ -143,6 +143,11 @@ void ofApp::update(){
     
     yloc = yloc + speed;
     // move rectangles by their y-coordinates
+    
+    if (!cursor)
+        ofShowCursor();
+    else
+        ofHideCursor();
 }
 
 
@@ -198,7 +203,7 @@ void ofApp::keyPressed(int key){
         ofToggleFullscreen();
     
     if (key == 'm')
-        ofHideCursor();
+        cursor = !cursor;
     
     if (key == 'h')
         hide = !hide;

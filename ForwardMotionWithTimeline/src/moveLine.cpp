@@ -9,9 +9,7 @@
 #include "moveLine.h"
 
 moveLine::moveLine(){
-    
 }
-
 
 void moveLine::setup(int numLines, float xStart, float yStart, float lineWidth, float xEnd, float yEnd){
 
